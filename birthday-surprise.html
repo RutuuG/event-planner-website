@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Birthday Surprises - Magical Moments | Event Planner</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-gradient: linear-gradient(135deg, #ff6b9d, #ff3366);
+      --secondary-gradient: linear-gradient(135deg, #ffd93d, #ffb347);
+      --accent-gradient: linear-gradient(135deg, #667eea, #764ba2);
+      --text-dark: #2c3e50;
+      --text-light: #7f8c8d;
+      --white: #ffffff;
+      --light-bg: #f8f9fa;
+      --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+      --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.15);
+      --shadow-heavy: 0 15px 50px rgba(0, 0, 0, 0.2);
+      --border-radius: 20px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background: var(--light-bg);
+      overflow-x: hidden;
+    }
+
+    /* Animated Background */
+    .animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(-45deg, #ff9a9e, #fecfef, #fecfef, #ff9a9e);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating Elements */
+    .floating-elements {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .floating-element {
+      position: absolute;
+      opacity: 0.1;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .floating-element:nth-child(1) {
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .floating-element:nth-child(2) {
+      top: 60%;
+      right: 10%;
+      animation-delay: 2s;
+    }
+
+    .floating-element:nth-child(3) {
+      bottom: 20%;
+      left: 20%;
+      animation-delay: 4s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    /* Header Styles */
+    .service-header {
+      background: var(--primary-gradient);
+      color: var(--white);
+      padding: 6rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    }
+
+    .service-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="60" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="60" cy="40" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+      animation: sparkle 20s linear infinite;
+    }
+
+    @keyframes sparkle {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .service-header h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 2;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      animation: slideInDown 1s ease-out;
+    }
+
+    .service-header p {
+      font-size: 1.4rem;
+      font-weight: 300;
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+      margin: 0 auto;
+      animation: slideInUp 1s ease-out 0.3s both;
+    }
+
+    @keyframes slideInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Main Content */
+    .main-content {
+      padding: 4rem 0;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    /* Service Cards */
+    .service-section {
+      margin-bottom: 4rem;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-light);
+      overflow: hidden;
+      transition: var(--transition);
+      position: relative;
+      margin-bottom: 3rem;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-heavy);
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--primary-gradient);
+    }
+
+    .service-content {
+      display: grid;
+      grid-template-columns: 350px 1fr;
+      gap: 2rem;
+      align-items: center;
+      padding: 2.5rem;
+    }
+
+    .service-image {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: var(--shadow-medium);
+    }
+
+    .service-image img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .service-card:hover .service-image img {
+      transform: scale(1.05);
+    }
+
+    .service-image::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(255, 107, 157, 0.2), rgba(255, 51, 102, 0.2));
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .service-card:hover .service-image::after {
+      opacity: 1;
+    }
+
+    .service-text {
+      padding: 1rem 0;
+    }
+
+    .service-text h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .service-text h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--primary-gradient);
+      border-radius: 2px;
+    }
+
+    .service-text ul {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .service-text li {
+      padding: 0.8rem 0;
+      color: var(--text-light);
+      font-size: 1.1rem;
+      position: relative;
+      padding-left: 2rem;
+      transition: var(--transition);
+    }
+
+    .service-text li::before {
+      content: '🎉';
+      position: absolute;
+      left: 0;
+      font-size: 1.2rem;
+      animation: bounce 2s infinite;
+    }
+
+    .service-text li:nth-child(2n)::before {
+      content: '🎈';
+      animation-delay: 0.5s;
+    }
+
+    .service-text li:nth-child(3n)::before {
+      content: '🎂';
+      animation-delay: 1s;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-5px);
+      }
+      60% {
+        transform: translateY(-3px);
+      }
+    }
+
+    .service-text li:hover {
+      color: var(--text-dark);
+      transform: translateX(5px);
+    }
+
+    /* Enhanced Button */
+    .service-btn {
+      background: var(--primary-gradient);
+      color: var(--white);
+      border: none;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: var(--shadow-medium);
+    }
+
+    .service-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: var(--transition);
+    }
+
+    .service-btn:hover::before {
+      left: 100%;
+    }
+
+    .service-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-heavy);
+    }
+
+    .service-btn:active {
+      transform: translateY(-1px);
+    }
+
+    /* Special Effects */
+    .sparkle {
+      position: relative;
+    }
+
+    .sparkle::after {
+      content: '✨';
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      font-size: 1.5rem;
+      animation: sparkleRotate 3s linear infinite;
+    }
+
+    @keyframes sparkleRotate {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.2); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .service-header {
+        padding: 4rem 1rem;
+        clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+      }
+
+      .service-header h1 {
+        font-size: 2.5rem;
+      }
+
+      .service-header p {
+        font-size: 1.1rem;
+      }
+
+      .main-content {
+        padding: 2rem 1rem;
+      }
+
+      .service-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 2rem;
+      }
+
+      .service-image {
+        max-width: 300px;
+        margin: 0 auto;
+      }
+
+      .service-text h2 {
+        font-size: 1.8rem;
+      }
+
+      .service-text h2::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .service-header h1 {
+        font-size: 2rem;
+      }
+
+      .service-content {
+        padding: 1.5rem;
+      }
+
+      .service-text h2 {
+        font-size: 1.5rem;
+      }
+
+      .service-btn {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+      }
+    }
+
+    /* Loading Animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease-out;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="animated-bg"></div>
+  
+  <!-- Floating Elements -->
+  <div class="floating-elements">
+    <div class="floating-element">🎈</div>
+    <div class="floating-element">🎉</div>
+    <div class="floating-element">🎂</div>
+  </div>
+
+  <!-- Header -->
+  <header class="service-header">
+    <h1 class="sparkle">Turning Ordinary Birthdays into Magical Moments!</h1>
+    <p>Because Birthdays Deserve a Wow! ✨</p>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- First Service Section -->
+    <section class="service-section reveal">
+      <div class="service-card">
+        <div class="service-content">
+          <div class="service-image">
+            <img src="./img/one.jpg" alt="Birthday celebration with balloons and decorations" />
+          </div>
+          <div class="service-text">
+            <h2>Premium Event Services</h2>
+            <ul>
+              <li>Stunning balloon bouquets and elegant table centerpieces</li>
+              <li>Romantic candlelight decor with ambient lanterns</li>
+              <li>Custom multi-tier anniversary and birthday cakes</li>
+              <li>Professional photography to capture every moment</li>
+              <li>Personalized party favors and gift coordination</li>
+            </ul>
+            <a href="birthday-learn-more.html">
+              <button class="service-btn">Discover More Magic</button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Second Service Section -->
+    <section class="service-section reveal">
+      <div class="service-card">
+        <div class="service-content">
+          <div class="service-image">
+            <img src="./img/surprise birthday2.jpg" alt="Systematic birthday planning setup" />
+          </div>
+          <div class="service-text">
+            <h2>Systematic Planning Excellence</h2>
+            <ul>
+              <li>Exclusive pre-event photoshoot sessions (optional)</li>
+              <li>Elegant printed invitation cards with premium envelopes</li>
+              <li>Professional protocol and security services</li>
+              <li>Versatile indoor/outdoor event setup options</li>
+              <li>Complete event timeline management</li>
+              <li>Surprise element coordination and execution</li>
+            </ul>
+            <a href="birthday-learn-more.html">
+              <button class="service-btn">Plan Your Surprise</button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Additional Features Section -->
+    <section class="service-section reveal">
+      <div class="service-card">
+        <div class="service-content">
+          <div class="service-image">
+            <img src="/placeholder.svg?height=280&width=350" alt="Birthday party entertainment and activities" />
+          </div>
+          <div class="service-text">
+            <h2>Entertainment & Activities</h2>
+            <ul>
+              <li>Live DJ and music coordination services</li>
+              <li>Interactive games and entertainment activities</li>
+              <li>Professional MC and event hosting</li>
+              <li>Custom playlist creation for all age groups</li>
+              <li>Photo booth setup with fun props and backdrops</li>
+              <li>Special performance bookings (magicians, dancers)</li>
+            </ul>
+            <a href="birthday-learn-more.html">
+              <button class="service-btn">Add Entertainment</button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Scroll Reveal Animation
+    function revealOnScroll() {
+      const reveals = document.querySelectorAll('.reveal');
+      
+      reveals.forEach(reveal => {
+        const windowHeight = window.innerHeight;
+        const elementTop = reveal.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < windowHeight - elementVisible) {
+          reveal.classList.add('active');
+        }
+      });
+    }
+
+    // Smooth scrolling for links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Button click effects
+    document.querySelectorAll('.service-btn').forEach(button => {
+      button.addEventListener('click', function(e) {
+        // Create ripple effect
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.classList.add('ripple');
+        
+        this.appendChild(ripple);
+        
+        setTimeout(() => {
+          ripple.remove();
+        }, 600);
+      });
+    });
+
+    // Add ripple CSS
+    const style = document.createElement('style');
+    style.textContent = `
+      .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        transform: scale(0);
+        animation: ripple-animation 0.6s linear;
+        pointer-events: none;
+      }
+      
+      @keyframes ripple-animation {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Initialize scroll reveal
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+
+    // Parallax effect for floating elements
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const parallax = document.querySelectorAll('.floating-element');
+      
+      parallax.forEach((element, index) => {
+        const speed = 0.5 + (index * 0.1);
+        element.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
+      });
+    });
+
+    // Add loading animation
+    window.addEventListener('load', () => {
+      document.body.style.opacity = '0';
+      document.body.style.transition = 'opacity 0.5s ease-in-out';
+      
+      setTimeout(() => {
+        document.body.style.opacity = '1';
+      }, 100);
+    });
+  </script>
+</body>
+</html>

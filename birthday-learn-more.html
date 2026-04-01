@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Birthday Event Planning - Learn More | Event Planner</title>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-color: #ff3366;
+      --secondary-color: #ff6b9d;
+      --accent-color: #ffd93d;
+      --text-dark: #2c3e50;
+      --text-light: #7f8c8d;
+      --bg-light: #f8f9fa;
+      --white: #ffffff;
+      --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      --border-radius: 12px;
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background-color: var(--bg-light);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header Styles */
+    .service-header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: var(--white);
+      padding: 4rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .service-header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .service-header p {
+      font-size: 1.2rem;
+      font-weight: 300;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Main Content */
+    .main-content {
+      padding: 4rem 0;
+    }
+
+    .content-section {
+      background: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 3rem;
+      overflow: hidden;
+    }
+
+    /* Hero Section with Left-aligned Image */
+    .hero-section {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 2rem;
+      padding: 2rem;
+      align-items: start;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-content h2 {
+      color: var(--primary-color);
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .hero-content p {
+      color: var(--text-light);
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Info Grid */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .info-card {
+      background: var(--bg-light);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      border-left: 4px solid var(--primary-color);
+    }
+
+    .info-card h3 {
+      color: var(--primary-color);
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .info-card ul {
+      list-style: none;
+    }
+
+    .info-card li {
+      padding: 0.5rem 0;
+      color: var(--text-dark);
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .info-card li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+
+    /* Guest Capacity Section */
+    .capacity-section {
+      background: linear-gradient(135deg, var(--accent-color), #ffeb3b);
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-dark);
+    }
+
+    .capacity-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .capacity-card {
+      background: var(--white);
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+    }
+
+    .capacity-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      display: block;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      padding: 2rem;
+      background: var(--white);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-card {
+      text-align: center;
+      padding: 1.5rem;
+      background: var(--bg-light);
+      border-radius: var(--border-radius);
+    }
+
+    .contact-card i {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    .contact-card h4 {
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-card p {
+      color: var(--text-light);
+    }
+
+    .contact-card a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .contact-card a:hover {
+      text-decoration: underline;
+    }
+
+    /* Map Section */
+    .map-section {
+      padding: 2rem;
+      background: var(--white);
+    }
+
+    .map-container {
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      height: 400px;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* CTA Button */
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: var(--white);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 51, 102, 0.3);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .service-header h1 {
+        font-size: 2rem;
+      }
+
+      .service-header p {
+        font-size: 1rem;
+      }
+
+      .hero-section {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-image {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+      }
+
+      .capacity-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 0 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .service-header {
+        padding: 2rem 0;
+      }
+
+      .service-header h1 {
+        font-size: 1.5rem;
+      }
+
+      .hero-content h2 {
+        font-size: 1.8rem;
+      }
+
+      .capacity-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .info-card {
+        padding: 1.5rem;
+      }
+    }
+
+    /* Animation */
+    .content-section {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="service-header">
+    <div class="container">
+      <h1>Birthday Event Planning Services</h1>
+      <p>Creating Magical Moments That Last a Lifetime</p>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <!-- Hero Section -->
+      <section class="content-section">
+        <div class="hero-section">
+          <img src="./img/one.jpg" alt="Birthday celebration setup" class="hero-image" />
+          <div class="hero-content">
+            <h2>Transform Your Special Day</h2>
+            <p>Our expert team specializes in creating unforgettable birthday experiences tailored to your unique vision. From intimate gatherings to grand celebrations, we handle every detail to ensure your special day is nothing short of magical.</p>
+            <p>With years of experience in event planning, we understand that every birthday is unique. Our personalized approach ensures that your celebration reflects your personality and creates lasting memories for you and your guests.</p>
+            <a href="#contact" class="cta-button">Plan Your Birthday Event</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Guest Capacity Section -->
+      <section class="content-section">
+        <div class="capacity-section">
+          <h2>Event Capacity & Packages</h2>
+          <p>We cater to celebrations of all sizes, from intimate family gatherings to large-scale birthday parties</p>
+          <div class="capacity-grid">
+            <div class="capacity-card">
+              <span class="capacity-number">10-25</span>
+              <h4>Intimate Package</h4>
+              <p>Perfect for close family and friends</p>
+            </div>
+            <div class="capacity-card">
+              <span class="capacity-number">25-50</span>
+              <h4>Standard Package</h4>
+              <p>Ideal for medium-sized celebrations</p>
+            </div>
+            <div class="capacity-card">
+              <span class="capacity-number">50-100</span>
+              <h4>Premium Package</h4>
+              <p>Great for larger birthday parties</p>
+            </div>
+            <div class="capacity-card">
+              <span class="capacity-number">100+</span>
+              <h4>Grand Package</h4>
+              <p>For milestone birthday celebrations</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Detailed Information -->
+      <section class="content-section">
+        <div class="info-grid">
+          <div class="info-card">
+            <h3><i class="fas fa-birthday-cake"></i> Event Services</h3>
+            <ul>
+              <li>Custom theme decoration and setup</li>
+              <li>Balloon bouquets and table centerpieces</li>
+              <li>Professional photography and videography</li>
+              <li>Multi-tier custom birthday cakes</li>
+              <li>Entertainment and music coordination</li>
+              <li>Catering services with diverse menu options</li>
+              <li>Party favors and gift coordination</li>
+            </ul>
+          </div>
+          
+          <div class="info-card">
+            <h3><i class="fas fa-clock"></i> Event Timeline</h3>
+            <ul>
+              <li>Initial consultation and planning (2-3 weeks prior)</li>
+              <li>Venue selection and booking confirmation</li>
+              <li>Theme finalization and decoration planning</li>
+              <li>Catering menu selection and tasting</li>
+              <li>Entertainment booking and coordination</li>
+              <li>Final headcount and logistics confirmation</li>
+              <li>Day-of event management and coordination</li>
+            </ul>
+          </div>
+          
+          <div class="info-card">
+            <h3><i class="fas fa-star"></i> Special Features</h3>
+            <ul>
+              <li>Personalized birthday banners and signage</li>
+              <li>Photo booth setup with custom props</li>
+              <li>Live entertainment options (DJ, band, performers)</li>
+              <li>Special lighting and ambiance creation</li>
+              <li>Surprise element coordination</li>
+              <li>Guest accommodation assistance</li>
+              <li>Post-event cleanup services</li>
+            </ul>
+          </div>
+          
+          <div class="info-card">
+            <h3><i class="fas fa-map-marker-alt"></i> Venue Options</h3>
+            <ul>
+              <li>Indoor banquet halls and event spaces</li>
+              <li>Outdoor garden and terrace venues</li>
+              <li>Restaurant private dining rooms</li>
+              <li>Home-based celebration setups</li>
+              <li>Beach and resort locations</li>
+              <li>Community centers and clubs</li>
+              <li>Unique themed venues</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="content-section" id="contact">
+        <div class="contact-section">
+          <h2 style="text-align: center; margin-bottom: 2rem; color: var(--primary-color);">Get In Touch</h2>
+          <div class="contact-grid">
+            <div class="contact-card">
+              <i class="fas fa-phone"></i>
+              <h4>Call Us</h4>
+              <p><a href="tel:+919876543210">+91 98765 43210</a></p>
+              <p><a href="tel:+919123456789">+91 91234 56789</a></p>
+            </div>
+            
+            <div class="contact-card">
+              <i class="fas fa-envelope"></i>
+              <h4>Email Us</h4>
+              <p><a href="mailto:info@eventplanner.com">info@eventplanner.com</a></p>
+              <p><a href="mailto:birthdays@eventplanner.com">birthdays@eventplanner.com</a></p>
+            </div>
+            
+            <div class="contact-card">
+              <i class="fas fa-clock"></i>
+              <h4>Business Hours</h4>
+              <p>Mon - Sat: 9:00 AM - 8:00 PM</p>
+              <p>Sunday: 10:00 AM - 6:00 PM</p>
+            </div>
+            
+            <div class="contact-card">
+              <i class="fas fa-whatsapp"></i>
+              <h4>WhatsApp</h4>
+              <p><a href="https://wa.me/919876543210">+91 98765 43210</a></p>
+              <p>Quick responses guaranteed</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Map Section -->
+      <section class="content-section">
+        <div class="map-section">
+          <h2 style="text-align: center; margin-bottom: 2rem; color: var(--primary-color);">Visit Our Office</h2>
+          <div class="map-container">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.8746479556887!2d77.2090212!3d28.6139391!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce2daa9eb4d0b%3A0x717971125923e5d!2sConnaught%20Place%2C%20New%20Delhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1703123456789!5m2!1sen!2sin"
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+          <div style="text-align: center; margin-top: 1rem; color: var(--text-light);">
+            <p><i class="fas fa-map-marker-alt"></i> 123 Event Plaza, Connaught Place, New Delhi - 110001</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.content-section').forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>

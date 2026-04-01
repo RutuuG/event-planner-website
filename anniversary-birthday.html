@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anniversary & Birthday Celebrations | Event Planner</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --gold-gradient: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+      --text-dark: #2d3748;
+      --text-light: #718096;
+      --white: #ffffff;
+      --light-bg: #f7fafc;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+      --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+      --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+      --border-radius: 16px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background: var(--light-bg);
+      overflow-x: hidden;
+    }
+
+    /* Animated Background */
+    .animated-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating Hearts Animation */
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      color: rgba(255, 182, 193, 0.3);
+      font-size: 20px;
+      animation: floatUp 8s infinite linear;
+    }
+
+    .heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .heart:nth-child(2) { left: 20%; animation-delay: 1s; }
+    .heart:nth-child(3) { left: 30%; animation-delay: 2s; }
+    .heart:nth-child(4) { left: 40%; animation-delay: 3s; }
+    .heart:nth-child(5) { left: 50%; animation-delay: 4s; }
+    .heart:nth-child(6) { left: 60%; animation-delay: 5s; }
+    .heart:nth-child(7) { left: 70%; animation-delay: 6s; }
+    .heart:nth-child(8) { left: 80%; animation-delay: 7s; }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Navigation */
+    .navbar {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+    }
+
+    .navbar.scrolled {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .nav-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .logo img {
+      height: 50px;
+      transition: var(--transition);
+    }
+
+    .logo:hover img {
+      transform: scale(1.05);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-gradient);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-login {
+      background: var(--primary-gradient);
+      color: var(--white) !important;
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      transition: var(--transition);
+    }
+
+    .nav-login:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Hero Section */
+    .anniversary-hero-section {
+      background: var(--primary-gradient);
+      color: var(--white);
+      padding: 8rem 2rem 6rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 70px;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    }
+
+    .anniversary-hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="sparkles" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="60" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23sparkles)"/></svg>');
+      animation: sparkleMove 20s linear infinite;
+    }
+
+    @keyframes sparkleMove {
+      0% { transform: translateX(0) translateY(0); }
+      100% { transform: translateX(-100px) translateY(-100px); }
+    }
+
+    .anniversary-hero-section h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 2;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      animation: slideInDown 1s ease-out;
+    }
+
+    .anniversary-hero-section p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      position: relative;
+      z-index: 2;
+      opacity: 0.95;
+      animation: slideInUp 1s ease-out 0.3s both;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    .btn-primary {
+      background: var(--white);
+      color: var(--text-dark);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    /* Services Section */
+    .services-section {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: var(--text-dark);
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--secondary-gradient);
+      border-radius: 2px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+      position: relative;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--secondary-gradient);
+    }
+
+    .service-image {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .service-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .service-card:hover .service-image img {
+      transform: scale(1.1);
+    }
+
+    .service-image::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .service-card:hover .service-image::after {
+      opacity: 1;
+    }
+
+    .service-content {
+      padding: 2rem;
+    }
+
+    .service-content h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
+
+    .service-content p {
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* Enhanced Services List */
+    .enhanced-services {
+      background: var(--white);
+      padding: 4rem 2rem;
+      margin: 4rem 0;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .services-showcase {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 3rem;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .showcase-image {
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+
+    .showcase-image img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .showcase-image:hover img {
+      transform: scale(1.05);
+    }
+
+    .services-list h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      margin-bottom: 2rem;
+      color: var(--text-dark);
+    }
+
+    .services-list ul {
+      list-style: none;
+    }
+
+    .services-list li {
+      padding: 0.8rem 0;
+      color: var(--text-light);
+      font-size: 1.1rem;
+      position: relative;
+      padding-left: 2rem;
+      transition: var(--transition);
+    }
+
+    .services-list li::before {
+      content: '💝';
+      position: absolute;
+      left: 0;
+      font-size: 1.2rem;
+      animation: pulse 2s infinite;
+    }
+
+    .services-list li:nth-child(2n)::before {
+      content: '🎊';
+      animation-delay: 0.5s;
+    }
+
+    .services-list li:nth-child(3n)::before {
+      content: '🌹';
+      animation-delay: 1s;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .services-list li:hover {
+      color: var(--text-dark);
+      transform: translateX(5px);
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background: var(--secondary-gradient);
+      color: var(--white);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 1rem;
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.9);
+      transition: var(--transition);
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      background: var(--white);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .contact-form button {
+      background: var(--white);
+      color: var(--text-dark);
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .contact-form button:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    /* Locations Section */
+    .location-section {
+      padding: 4rem 2rem;
+      background: var(--white);
+    }
+
+    .locations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .location-card {
+      text-align: center;
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      background: var(--light-bg);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .location-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: var(--transition);
+    }
+
+    .location-card:hover::before {
+      left: 100%;
+    }
+
+    .location-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .location-card img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 1rem;
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .location-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .location-card span {
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    /* Animations */
+    @keyframes slideInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .anniversary-hero-section {
+        padding: 6rem 1rem 4rem;
+        clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+      }
+
+      .anniversary-hero-section h1 {
+        font-size: 2.5rem;
+      }
+
+      .anniversary-hero-section p {
+        font-size: 1.1rem;
+      }
+
+      .services-showcase {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .section-title {
+        font-size: 2.2rem;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .anniversary-hero-section h1 {
+        font-size: 2rem;
+      }
+
+      .services-section {
+        padding: 4rem 1rem;
+      }
+
+      .contact-section {
+        padding: 3rem 1rem;
+      }
+    }
+
+    /* Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease-out;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="animated-background"></div>
+  
+  <!-- Floating Hearts -->
+  <div class="floating-hearts">
+    <div class="heart">💖</div>
+    <div class="heart">💕</div>
+    <div class="heart">💝</div>
+    <div class="heart">💖</div>
+    <div class="heart">💕</div>
+    <div class="heart">💝</div>
+    <div class="heart">💖</div>
+    <div class="heart">💕</div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-flex">
+      <a href="index.html" class="logo">
+        <img src="./img/images.png" alt="Event Planner Logo">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="#location">Location</a></li>
+        <li><a href="./login.html" class="nav-login">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="anniversary-hero-section">
+    <div class="container">
+      <h1>Celebrate Life's Special Moments</h1>
+      <p>Make every birthday and anniversary unforgettable with our personalized planning services, designed to bring your dreams to life with elegance and joy.</p>
+      <a href="#contact" class="btn btn-primary">Plan Your Celebration</a>
+    </div>
+  </header>
+
+  <!-- Services Section -->
+  <section class="services-section reveal" id="services">
+    <h2 class="section-title">Our Celebration Services</h2>
+    
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-image">
+          <img src="./img/78e92216323ea4f09b5f72cc1766f1d7.jpg" alt="Theme Party Planning">
+        </div>
+        <div class="service-content">
+          <h3>Themed Celebrations</h3>
+          <p>Transform your vision into reality with our custom theme parties. From elegant vintage to modern chic, we create immersive experiences that reflect your unique style.</p>
+          <a href="birthday-surprise.html" class="button">details>>></a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-image">
+          <img src="./img/custom decor.jpg" alt="Custom Decoration">
+        </div>
+        <div class="service-content">
+          <h3>Custom Décor & Design</h3>
+          <p>Let your imagination soar with our bespoke decoration services. We bring your creative ideas to life with stunning visual elements and personalized touches.</p>
+          <a href="birthday-surprise.html" class="button">details>>></a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-image">
+          <img src="./img/Anniversary.jpg" alt="Anniversary Planning">
+        </div>
+        <div class="service-content">
+          <h3>Anniversary Celebrations</h3>
+          <p>Honor your love story with perfectly planned anniversary celebrations. From intimate dinners to grand parties, we make every milestone memorable.</p>
+          <a href="birthday-surprise.html" class="button">details>>></a>
+        </div>
+      </div>
+
+     <div class="service-card">
+  <div class="service-image">
+    <img src="./img/birthday plan4.jpg" alt="Birthday Surprises">
+  </div>
+  <div class="service-content">
+    <h3>Birthday Surprises</h3>
+    <p>Create magical birthday moments that will be treasured forever. Our surprise planning expertise ensures every detail exceeds expectations.</p>
+    <a href="birthday-surprise.html" class="button">details>>></a>
+  </div>
+</div>
+
+    </div>
+  </section>
+
+  <!-- Enhanced Services Showcase -->
+  <section class="enhanced-services reveal">
+    <div class="services-showcase">
+      <div class="showcase-image">
+        <img src="./img/one.jpg" alt="Premium Event Services">
+      </div>
+      <div class="services-list">
+        <h2>Our Premium Services Include</h2>
+        <ul>
+          <li>Exquisite balloon arrangements and elegant centerpieces</li>
+          <li>Romantic candlelight ambiance with designer lanterns</li>
+          <li>Custom multi-tier celebration cakes with artistic designs</li>
+          <li>Professional photography and videography services</li>
+          <li>Live entertainment and music coordination</li>
+          <li>Gourmet catering with personalized menu options</li>
+          <li>Luxury venue selection and complete setup management</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section reveal">
+    <div class="container">
+      <h2 class="section-title" style="color: white; margin-bottom: 2rem;">Contact Us to Plan Your Celebration</h2>
+      <form class="contact-form">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <input type="tel" name="phone" placeholder="Your Phone Number" />
+        <textarea name="message" placeholder="Tell us about your dream celebration..." rows="4" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Locations Section -->
+  <section id="location" class="location-section reveal">
+    <div class="container">
+      <h2 class="section-title">Our Service Locations</h2>
+      <div class="locations-grid">
+        <div class="location-card">
+          <img src="https://ext.same-assets.com/3899793884/3702326708.png" alt="Jaipur">
+          <span>Jaipur</span>
+        </div>
+        <div class="location-card">
+          <img src="https://ext.same-assets.com/3899793884/2862392476.png" alt="Delhi NCR">
+          <span>Delhi NCR</span>
+        </div>
+        <div class="location-card">
+          <img src="https://ext.same-assets.com/3899793884/3489089380.png" alt="Bangalore">
+          <span>Bangalore</span>
+        </div>
+        <div class="location-card">
+          <img src="https://ext.same-assets.com/3899793884/911666590.png" alt="Kolkata">
+          <span>Kolkata</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 100) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Scroll reveal animation
+    function revealOnScroll() {
+      const reveals = document.querySelectorAll('.reveal');
+      
+      reveals.forEach(reveal => {
+        const windowHeight = window.innerHeight;
+        const elementTop = reveal.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < windowHeight - elementVisible) {
+          reveal.classList.add('active');
+        }
+      });
+    }
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Form submission with animation
+    document.querySelector('.contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const button = this.querySelector('button');
+      const originalText = button.textContent;
+      
+      button.textContent = 'Sending...';
+      button.style.background = 'var(--accent-gradient)';
+      
+      setTimeout(() => {
+        button.textContent = 'Message Sent! ✓';
+        button.style.background = '#10b981';
+        
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.style.background = '';
+          this.reset();
+        }, 2000);
+      }, 1500);
+    });
+
+    // Parallax effect for floating hearts
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const hearts = document.querySelectorAll('.heart');
+      
+      hearts.forEach((heart, index) => {
+        const speed = 0.5 + (index * 0.1);
+        heart.style.transform = `translateY(${scrolled * speed}px)`;
+      });
+    });
+
+    // Initialize animations
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+
+    // Add stagger animation to service cards
+    const serviceCards = document.querySelectorAll('.service-card');
+    serviceCards.forEach((card, index) => {
+      card.style.animationDelay = `${index * 0.2}s`;
+    });
+
+    // Interactive hover effects for service cards
+    serviceCards.forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-15px) scale(1.02)';
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+
+    // Loading animation
+    window.addEventListener('load', () => {
+      document.body.style.opacity = '0';
+      document.body.style.transition = 'opacity 0.5s ease-in-out';
+      
+      setTimeout(() => {
+        document.body.style.opacity = '1';
+      }, 100);
+    });
+  </script>
+</body>
+</html>
